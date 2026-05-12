@@ -1,0 +1,19 @@
+documents:
+  marriage_certificate:
+    material: PAPER
+    custom-model-data: 0
+    name: "<gradient:#ec4899:#f472b6>Свидетельство о браке</gradient>"
+  birth_certificate:
+    material: PAPER
+    custom-model-data: 0
+    name: "<gradient:#38bdf8:#7dd3fc>Свидетельство о рождении</gradient>"
+  engagement_certificate:
+    material: PAPER
+    custom-model-data: 0
+    name: "<gradient:#fbbf24:#fcd34d>Свидетельство о помолвке</gradient>"
+
+ring:
+  name: "<gradient:#f43f5e:#fb7185>Помолвочное кольцо</gradient>"
+  lore:
+    - "<gray>ПКМ по игроку — сделать предложение.</gray>"
+    - "<dark_gray>NMLP</dark_gray>"

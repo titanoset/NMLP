@@ -1,0 +1,121 @@
+# Сообщения MiniMessage. Плейсхолдеры: <actor>, <target>, <value>, <command> и т.д.
+prefix: "<gradient:#7c3aed:#a855f7>[NMLP]</gradient> <gray>»</gray> "
+
+# Иконки пола для PlaceholderAPI (%nmlp_gender%, %nmlp_gender_Ник%) — меняйте на свои символы/эмодзи
+icons:
+  gender:
+    male: "♂"
+    female: "♀"
+    unknown: "○"
+
+errors:
+  no-permission: "<prefix><red>Нет прав.</red>"
+  player-only: "<prefix><red>Только для игроков.</red>"
+  not-found: "<prefix><red>Игрок не найден.</red>"
+  cooldown: "<prefix><red>Подождите немного.</red>"
+  db-error: "<prefix><red>Ошибка базы данных.</red>"
+  already-married: "<prefix><red>Вы уже в браке.</red>"
+  target-married: "<prefix><red>Этот игрок уже в браке.</red>"
+  not-engaged: "<prefix><red>Вы не помолвлены.</red>"
+  not-married: "<prefix><red>Вы не в браке.</red>"
+  must-engage-first: "<prefix><red>Сначала нужна помолвка.</red>"
+  no-active-partner: "<prefix><red>Нет партнёра для этого действия.</red>"
+  cannot-self: "<prefix><red>Нельзя выбрать себя.</red>"
+  invalid-gender: "<prefix><red>Укажите: male или female</red>"
+  proposal-pending: "<prefix><yellow>У вас уже есть активное предложение.</yellow>"
+  no-pending: "<prefix><gray>Нет ожидающего предложения.</gray>"
+  ring-wrong-item: "<prefix><gray>Держите кольцо в основной руке.</gray>"
+
+gender:
+  set: "<prefix><green>Пол: <white><value></white>. Местоимения выставлены автоматически.</green>"
+  current: "<prefix><gray>Пол: <white><value></white> — команды <white>/gender male</white> или <white>/gender female</white></gray>"
+
+wizard:
+  welcome: "<prefix><yellow>Добро пожаловать! Выберите пол: <click:run_command:'/gender male'><green>[мужской — он/его]</green></click> <click:run_command:'/gender female'><green>[женский — она/ее]</green></click></yellow>"
+  done: "<prefix><green>Настройка профиля завершена.</green>"
+
+engage:
+  proposed: "<prefix><gold><actor> сделал(а) предложение <target>!</gold>"
+  received: "<prefix><gold><actor> хочет на вас жениться! Введите <green>/engage accept <actor></green> или проигнорируйте.</gold>"
+  accepted: "<prefix><green>Помолвка принята!</green>"
+  notify-partner: "<prefix><green>Ваш партнёр принял помолвку.</green>"
+  usage: "<prefix><gray>Использование: <white>/engage accept <ник></white></gray>"
+
+marry:
+  success: "<prefix><light_purple>Вы в браке!</light_purple>"
+  broadcast: "<prefix><light_purple><a> и <b> поженились!</light_purple>"
+
+divorce:
+  success: "<prefix><gray>Отношения прекращены.</gray>"
+
+partner:
+  header: "<prefix><gray>Партнёр: <white><name></white> — <soft_status></gray>"
+  none: "<prefix><gray>Нет партнёра.</gray>"
+
+family:
+  open: "<prefix><gray>Открываю меню семьи…</gray>"
+
+adoption:
+  usage: "<prefix><gray>Использование: <white>/adopt <ник></white></gray>"
+  success: "<prefix><green>Усыновление записано.</green>"
+
+reload:
+  done: "<prefix><green>Конфигурация перезагружена.</green>"
+
+debug:
+  enabled: "<prefix><yellow>Отладка: <white><value></white></yellow>"
+
+admin:
+  usage: "<prefix><gray>Команды: <white>/nmlp reload</white> | <white>/nmlp debug true|false</white> | <white>/nmlp give ring</white></gray>"
+
+placeholders:
+  none: "—"
+  single: "Одинок(а)"
+  ex-list-sep: ", "
+  status:
+    SINGLE: "Одинок(а)"
+    ENGAGED: "Помолвлен(а)"
+    MARRIED: "В браке"
+    DIVORCED: "Разведён(а)"
+    BOYFRIEND: "Парень"
+    GIRLFRIEND: "Девушка"
+    EX: "Бывший(ая)"
+  pronouns:
+    he_him: "он/его"
+    she_her: "она/ее"
+
+risk:
+  disabled: "<prefix><gray>Риск-действия отключены.</gray>"
+  unknown: "<prefix><red>Неизвестный ключ: <white><id></white></red>"
+  cooldown: "<prefix><red>Подождите перед повтором.</red>"
+  use: "<prefix><green>Эффект применён (<white><id></white>).</green>"
+  overuse: "<prefix><red>Слишком часто!</red>"
+  lethal: "<prefix><dark_red>Организм не выдержал…</dark_red>"
+  usage: "<prefix><gray>/risk</gray>"
+  by_action:
+    sex:
+      use: "<prefix><green>Вы провели близость с партнёром.</green>"
+      overuse: "<prefix><red>Слишком часто — организм не справляется.</red>"
+      lethal: "<prefix><dark_red>Организм не выдержал перегрузки…</dark_red>"
+    masturbate:
+      use: "<prefix><green>Вы удовлетворили себя.</green>"
+      overuse: "<prefix><red>Слишком часто — последствия неизбежны.</red>"
+      lethal: "<prefix><dark_red>Организм не выдержал перегрузки…</dark_red>"
+
+affection:
+  disabled: "<prefix><gray>Эмоции отключены.</gray>"
+  cooldown: "<prefix><red>Слишком часто.</red>"
+  need-partner-or-name: "<prefix><gray>Партнёр не рядом — попробуйте <white><command> <ник></white>, если есть право «друг».</gray>"
+  partner-offline: "<prefix><gray>Партнёр не в сети.</gray>"
+  partner-only: "<prefix><red>Это не ваш партнёр.</red>"
+  cannot-self: "<prefix><red>Нельзя на себя.</red>"
+  different-world: "<prefix><red>Только в одном мире.</red>"
+  too-far: "<prefix><red>Слишком далеко.</red>"
+  hug:
+    sender: "<prefix><green>Вы обняли <target>.</green>"
+    target: "<prefix><green><actor> обнял(а) вас.</green>"
+    nearby: "<prefix><gray><actor> обнял(а) <target>.</gray>"
+  kiss:
+    sender: "<prefix><light_purple>Вы поцеловали <target>.</light_purple>"
+    target: "<prefix><light_purple><actor> поцеловал(а) вас.</light_purple>"
+    nearby: "<prefix><gray><actor> поцеловал(а) <target>.</gray>"

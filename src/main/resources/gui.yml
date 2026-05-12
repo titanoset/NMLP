@@ -1,0 +1,50 @@
+# Заголовки GUI (MiniMessage) и подписи
+profile:
+  title: "<gradient:#6366f1:#8b5cf6>Профиль отношений</gradient>"
+  rows: 4
+
+family:
+  title: "<gradient:#0ea5e9:#22d3ee>Семья</gradient>"
+  rows: 5
+
+tree:
+  title: "<gradient:#10b981:#34d399>Родословная</gradient>"
+  rows: 6
+
+history:
+  title: "<gradient:#f59e0b:#fbbf24>История отношений</gradient>"
+  rows: 5
+
+settings:
+  title: "<gray>Настройки</gray>"
+  rows: 3
+
+filler:
+  material: GRAY_STAINED_GLASS_PANE
+  name: " "
+
+navigation:
+  back-slot: 45
+  next-slot: 53
+  close-slot: 49
+
+labels:
+  you: "<green>Вы"
+  partner: "<light_purple>Партнёр"
+  history_title: "<gray>История"
+  history_hint: "<dark_gray>Нажмите, чтобы открыть</dark_gray>"
+  tree_root: "<green>Вы"
+  parent: "<gold>Родитель"
+  child: "<yellow>Ребёнок"
+  settings_gender: "<green>Пол"
+  settings_gender_lore_1: "<gray>/gender male или /gender female</gray>"
+  settings_gender_lore_2: "<dark_gray>Местоимения с полом автоматически</dark_gray>"
+
+link_type:
+  PARENT: "<aqua>Родитель"
+  CHILD: "<aqua>Ребёнок"
+  ADOPTIVE_PARENT: "<aqua>Приёмный родитель"
+  ADOPTIVE_CHILD: "<aqua>Приёмный ребёнок"
+  SIBLING: "<aqua>Брат/сестра"
+  STEP_PARENT: "<aqua>Отчим/мачеха"
+  EX_FAMILY: "<aqua>Бывшая семья"

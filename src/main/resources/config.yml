@@ -1,0 +1,51 @@
+# Основной конфиг NMLP
+database:
+  file: "plugins/NMLP/data.db"
+  pool-size: 4
+  max-lifetime-ms: 1800000
+
+async:
+  pool-threads: 4
+
+cooldowns:
+  gui-open-ms: 500
+  propose-ms: 30000
+
+economy:
+  enabled: false
+  engage-cost: 0.0
+  marry-cost: 0.0
+  ring-cost: 0.0
+
+ring:
+  material: CLOCK
+  custom-model-data: 0
+  proposal-radius: 5.0
+
+effects:
+  marriage:
+    fireworks: true
+    hearts-particles: true
+    particle-count: 24
+    sound: entity.player.levelup
+    sound-volume: 1.0
+    sound-pitch: 1.2
+
+tab:
+  # Если TAB читает PlaceholderAPI — в конфиге TAB используйте %nmlp_*%
+  heart-prefix-enabled: false
+  heart-symbol: "♥ "
+
+# Эмоции пары / с правом nmlp.affection.friend — тексты в messages.yml
+affection:
+  enabled: true
+  max-distance: 4.0
+  cooldown-ms: 3000
+  hug:
+    particles: true
+    particle-count: 10
+  kiss:
+    particles: true
+    particle-count: 14
+
+debug: false

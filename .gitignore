@@ -1,0 +1,12 @@
+.gradle/
+build/
+out/
+.idea/
+*.iml
+.DS_Store
+plugins/
+*.db
+*.md
+!README.md
+sonar-project.propertiess
+.scannerwork

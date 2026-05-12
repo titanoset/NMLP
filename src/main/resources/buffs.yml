@@ -1,0 +1,46 @@
+# Приватный сервер: ключи действий — ваши. Права LuckPerms: nmlp.risk.sex, nmlp.risk.masturbate (или nmlp.risk.*).
+# Вызов: /risk sex | /risk masturbate. Алиасы команд — в commands.yml сервера (см. wiki Spigot commands.yml).
+enabled: true
+
+# Сбросить штраф max health при смерти (снимает модификатор NMLP)
+reset-risk-health-on-death: true
+
+actions:
+  # Секс — короткий баф; при злоупотреблении штрафы и потеря max HP
+  sex:
+    cooldown-ms: 45000
+    abuse-window-ms: 180000
+    max-uses-in-window: 5
+    apply-primary-on-overuse: true
+    primary:
+      - type: regeneration
+        duration-ticks: 80
+        amplifier: 0
+    penalty:
+      - type: weakness
+        duration-ticks: 200
+        amplifier: 0
+      - type: slowness
+        duration-ticks: 120
+        amplifier: 0
+    # Потеря max health за каждое использование СВЕРХ лимита (2.0 ≈ 1 сердце)
+    max-health-loss-per-excess-use: 2.0
+    min-max-health-lethal: 6.0
+    kill-on-lethal: true
+
+  masturbate:
+    cooldown-ms: 60000
+    abuse-window-ms: 300000
+    max-uses-in-window: 4
+    apply-primary-on-overuse: false
+    primary:
+      - type: strength
+        duration-ticks: 100
+        amplifier: 0
+    penalty:
+      - type: nausea
+        duration-ticks: 160
+        amplifier: 0
+    max-health-loss-per-excess-use: 3.0
+    min-max-health-lethal: 6.0
+    kill-on-lethal: true

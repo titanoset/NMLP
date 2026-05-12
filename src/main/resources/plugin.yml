@@ -1,0 +1,77 @@
+name: NMLP
+version: ${version}
+main: com.nmlp.NMLPPlugin
+api-version: "1.21"
+authors: [NMLP]
+description: NMLP — социальный плагин отношений, семьи и помолвки/брака для Minecraft.
+softdepend: [Vault, PlaceholderAPI, TAB]
+
+permissions:
+  nmlp.user:
+    description: Основные функции плагина для игроков.
+    default: true
+  nmlp.affection.friend:
+    description: Обнимашки/поцелуи не только с партнёром (в пределах дистанции).
+    default: false
+  nmlp.admin:
+    description: Администрирование NMLP.
+    default: op
+  nmlp.reload:
+    description: Перезагрузка конфигурации NMLP.
+    default: op
+  nmlp.debug:
+    description: Отладочный вывод NMLP.
+    default: op
+  nmlp.risk.*:
+    description: Все «рискованные» действия из buffs.yml (по ключам).
+    default: op
+
+commands:
+  marry:
+    description: Заключить брак (нужна помолвка).
+    usage: /<command>
+    permission: nmlp.user
+  engage:
+    description: Помолвка — принять предложение.
+    usage: /<command> accept <ник>
+    permission: nmlp.user
+  divorce:
+    description: Расторгнуть брак или помолвку.
+    usage: /<command>
+    permission: nmlp.user
+  partner:
+    description: Профиль отношений.
+    usage: /<command>
+    permission: nmlp.user
+  family:
+    description: Меню семьи.
+    usage: /<command>
+    permission: nmlp.user
+  tree:
+    description: Родословная (GUI).
+    usage: /<command>
+    permission: nmlp.user
+  gender:
+    description: Установить пол (местоимения выставляются автоматически).
+    usage: /<command> [male|female]
+    permission: nmlp.user
+  adopt:
+    description: Усыновить игрока (он должен быть в сети).
+    usage: /<command> <ник>
+    permission: nmlp.user
+  hug:
+    description: Обнять партнёра или игрока рядом (с правом «друг»).
+    usage: /<command> [ник]
+    permission: nmlp.user
+  kiss:
+    description: Поцеловать партнёра или игрока рядом (с правом «друг»).
+    usage: /<command> [ник]
+    permission: nmlp.user
+  risk:
+    description: Рискованное действие (бафы/штрафы из buffs.yml). Нужно nmlp.risk.<ключ> или nmlp.risk.*.
+    usage: /<command> <ключ>
+    permission: nmlp.user
+  nmlp:
+    description: Администрирование NMLP.
+    usage: /nmlp <reload|debug|give ring>
+    permission: nmlp.reload
