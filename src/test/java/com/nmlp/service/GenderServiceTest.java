@@ -48,6 +48,9 @@ class GenderServiceTest {
     void setUp() {
         service = new GenderService(players, history, cache);
         when(player.getUniqueId()).thenReturn(uuid);
+        when(player.getName()).thenReturn("user");
+        when(cache.refresh(eq(uuid), eq("user"))).thenReturn(CompletableFuture.completedFuture(
+                ProfileSnapshot.empty(uuid, "user")));
         when(players.setGender(any(), anyInt(), anyLong())).thenReturn(CompletableFuture.completedFuture(null));
         when(players.setPronouns(any(), anyInt(), anyLong())).thenReturn(CompletableFuture.completedFuture(null));
         when(history.append(any(), any(), any(), any(), any(), anyLong())).thenReturn(CompletableFuture.completedFuture(null));
@@ -62,7 +65,7 @@ class GenderServiceTest {
 
         Boolean wizardDone = service.setGender(player, GenderType.FEMALE).join();
         assertFalse(wizardDone);
-        verify(cache).invalidate(uuid);
+        verify(cache).refresh(eq(uuid), eq("user"));
     }
 
     @Test
@@ -77,13 +80,14 @@ class GenderServiceTest {
         verify(players).setSetupComplete(eq(uuid), eq(true), anyLong());
         verify(history).append(eq(HistoryEventType.GENDER_SET), eq(uuid), any(), any(), any(), anyLong());
         verify(history).append(eq(HistoryEventType.PRONOUNS_SET), eq(uuid), any(), any(), eq("she_her"), anyLong());
+        verify(cache).refresh(eq(uuid), eq("user"));
     }
 
     @Test
-    void completeWizardInvalidatesCache() {
+    void completeWizardRefreshesCache() {
         when(players.setSetupComplete(eq(uuid), eq(true), anyLong())).thenReturn(CompletableFuture.completedFuture(null));
 
         service.completeWizard(player).join();
-        verify(cache).invalidate(uuid);
+        verify(cache).refresh(eq(uuid), eq("user"));
     }
 }

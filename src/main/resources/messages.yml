@@ -25,6 +25,10 @@ errors:
   proposal-pending: "<prefix><yellow>У вас уже есть активное предложение.</yellow>"
   no-pending: "<prefix><gray>Нет ожидающего предложения.</gray>"
   ring-wrong-item: "<prefix><gray>Держите кольцо в основной руке.</gray>"
+  insufficient-funds: "<prefix><red>Недостаточно денег.</red>"
+  inventory-full: "<prefix><red>Инвентарь полон — освободите место.</red>"
+  ring-grant-cooldown: "<prefix><red>Слишком часто. Подождите <white><seconds></white> с.</red>"
+  insufficient-diamonds: "<prefix><red>Нужно <white><amount></white> алмазов что бы получить кольцо.</red>"
 
 gender:
   set: "<prefix><green>Пол: <white><value></white>. Местоимения выставлены автоматически.</green>"
@@ -39,7 +43,8 @@ engage:
   received: "<prefix><gold><actor> хочет на вас жениться! Введите <green>/engage accept <actor></green> или проигнорируйте.</gold>"
   accepted: "<prefix><green>Помолвка принята!</green>"
   notify-partner: "<prefix><green>Ваш партнёр принял помолвку.</green>"
-  usage: "<prefix><gray>Использование: <white>/engage accept <ник></white></gray>"
+  ring-given: "<prefix><green>Вы получили помолвочное кольцо. ПКМ по игроку в основной руке — предложение.</green>"
+  usage: "<prefix><gray>Использование: <white>/engage accept <ник></white> или <white>/engage ring</white> (получить кольцо).</gray>"
 
 marry:
   success: "<prefix><light_purple>Вы в браке!</light_purple>"

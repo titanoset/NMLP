@@ -113,7 +113,7 @@ public final class NMLPPlugin extends JavaPlugin {
             getCommand("gender").setTabCompleter(gc);
         }
         if (getCommand("engage") != null) {
-            EngageCommand ec = new EngageCommand(this, relationshipService, messages, documentItemService);
+            EngageCommand ec = new EngageCommand(this, reloadManager, vaultHook, relationshipService, messages, documentItemService);
             getCommand("engage").setExecutor(ec);
             getCommand("engage").setTabCompleter(ec);
         }

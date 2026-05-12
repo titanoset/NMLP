@@ -14,12 +14,14 @@ public final class MainConfig {
     private final int asyncPoolThreads;
     private final long guiCooldownMs;
     private final long proposeCooldownMs;
+    private final long ringGrantCooldownMs;
     private final boolean economyEnabled;
     private final double engageCost;
     private final double marryCost;
     private final double ringCost;
     private final String ringMaterial;
     private final int ringCustomModelData;
+    private final int ringPurchaseDiamonds;
     private final double proposalRadius;
     private final boolean marriageFireworks;
     private final boolean marriageHearts;
@@ -45,12 +47,14 @@ public final class MainConfig {
         this.asyncPoolThreads = c.getInt("async.pool-threads", 4);
         this.guiCooldownMs = c.getLong("cooldowns.gui-open-ms", 500L);
         this.proposeCooldownMs = c.getLong("cooldowns.propose-ms", 30_000L);
+        this.ringGrantCooldownMs = c.getLong("cooldowns.ring-grant-ms", 0L);
         this.economyEnabled = c.getBoolean("economy.enabled", false);
         this.engageCost = c.getDouble("economy.engage-cost", 0);
         this.marryCost = c.getDouble("economy.marry-cost", 0);
         this.ringCost = c.getDouble("economy.ring-cost", 0);
         this.ringMaterial = c.getString("ring.material", "CLOCK");
         this.ringCustomModelData = c.getInt("ring.custom-model-data", 0);
+        this.ringPurchaseDiamonds = Math.max(0, c.getInt("ring.purchase-diamonds", 20));
         this.proposalRadius = c.getDouble("ring.proposal-radius", 5.0);
         this.marriageFireworks = c.getBoolean("effects.marriage.fireworks", true);
         this.marriageHearts = c.getBoolean("effects.marriage.hearts-particles", true);
@@ -94,6 +98,13 @@ public final class MainConfig {
         return proposeCooldownMs;
     }
 
+    /**
+     * Minimum delay between {@code /engage ring} per player; {@code 0} = no limit.
+     */
+    public long ringGrantCooldownMs() {
+        return ringGrantCooldownMs;
+    }
+
     public boolean economyEnabled() {
         return economyEnabled;
     }
@@ -116,6 +127,13 @@ public final class MainConfig {
 
     public int ringCustomModelData() {
         return ringCustomModelData;
+    }
+
+    /**
+     * Diamonds consumed by {@code /engage ring}; {@code 0} = no item cost.
+     */
+    public int ringPurchaseDiamonds() {
+        return ringPurchaseDiamonds;
     }
 
     public double proposalRadius() {

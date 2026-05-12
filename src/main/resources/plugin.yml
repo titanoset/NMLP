@@ -32,8 +32,8 @@ commands:
     usage: /<command>
     permission: nmlp.user
   engage:
-    description: Помолвка — принять предложение.
-    usage: /<command> accept <ник>
+    description: Помолвка — принять предложение или получить кольцо.
+    usage: /<command> accept <ник> | /<command> ring
     permission: nmlp.user
   divorce:
     description: Расторгнуть брак или помолвку.

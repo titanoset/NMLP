@@ -36,6 +36,7 @@ HTML-отчёт JaCoCo: `build/reports/jacoco/test/html/index.html`, XML для 
 |---------|----------|
 | `/gender [male\|female]` | Пол; местоимения выставляются автоматически |
 | `/engage accept <ник>` | Принять предложение |
+| `/engage ring` | Получить помолвочное кольцо за алмазы (`ring.purchase-diamonds` в `config.yml`, по умолчанию 20) и при желании деньги Vault |
 | `/marry` | Брак (после помолвки) |
 | `/divorce` | Развод / снятие помолвки |
 | `/partner`, `/family`, `/tree` | GUI |
@@ -44,7 +45,7 @@ HTML-отчёт JaCoCo: `build/reports/jacoco/test/html/index.html`, XML для 
 | `/risk <ключ>` | Риск-действия: бафы, при злоупотреблении штраф и потеря max HP (см. `buffs.yml`) |
 | `/nmlp reload` / `/nmlp give ring` | Админ |
 
-ПКМ по игроку с **кольцом** (`/nmlp give ring`) — предложение.
+ПКМ по игроку с **кольцом** (получить: **`/engage ring`**, админ: `/nmlp give ring`) — предложение.
 
 ## PlaceholderAPI (идентификатор `nmlp`)
 
@@ -86,6 +87,7 @@ HTML-отчёт JaCoCo: `build/reports/jacoco/test/html/index.html`, XML для 
 |---------|-------------|
 | `/gender [male\|female]` | Gender (pronouns follow: male → он/его, female → она/ее) |
 | `/engage accept <player>` | Accept proposal |
+| `/engage ring` | Get an engagement ring: pays diamonds (`ring.purchase-diamonds` in `config.yml`, default 20) and optional Vault money |
 | `/marry` | Marry current partner (must be engaged) |
 | `/divorce` | End marriage or engagement |
 | `/partner` | Relationship profile GUI |
@@ -97,7 +99,7 @@ HTML-отчёт JaCoCo: `build/reports/jacoco/test/html/index.html`, XML для 
 | `/nmlp reload` | Reload configs (`nmlp.reload`) |
 | `/nmlp give ring` | Admin: add proposal ring to inventory (`nmlp.admin`) |
 
-Right-click another player with the **engagement ring** (from `/nmlp` admin can be spawned via give command or future admin subcommand) to propose.
+Right-click another player with the **engagement ring** (get one with **`/engage ring`**; admins may still use `/nmlp give ring`) to propose.
 
 ### Emotes (`/hug`, `/kiss`)
 

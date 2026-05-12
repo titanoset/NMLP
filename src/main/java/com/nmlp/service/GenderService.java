@@ -37,6 +37,7 @@ public final class GenderService {
      */
     public @NotNull CompletableFuture<Boolean> setGender(@NotNull Player player, @NotNull GenderType type) {
         UUID u = player.getUniqueId();
+        String usernameLast = player.getName() == null ? "" : player.getName();
         long now = System.currentTimeMillis();
         int genderId = type == GenderType.MALE ? 1 : 2;
         int pronounId = type == GenderType.MALE ? 1 : 2;
@@ -46,10 +47,7 @@ public final class GenderService {
                 .thenCompose(v -> history.append(HistoryEventType.GENDER_SET, u, null, null, type.code(), now))
                 .thenCompose(v -> history.append(HistoryEventType.PRONOUNS_SET, u, null, null, pronounCode, now))
                 .thenCompose(v -> maybeFinishWizard(u, now))
-                .thenApply(wizardDone -> {
-                    cache.invalidate(u);
-                    return wizardDone;
-                });
+                .thenCompose(wizardDone -> cache.refresh(u, usernameLast).thenApply(s -> wizardDone));
     }
 
     private @NotNull CompletableFuture<Boolean> maybeFinishWizard(@NotNull UUID u, long now) {
@@ -67,7 +65,10 @@ public final class GenderService {
 
     public @NotNull CompletableFuture<Void> completeWizard(@NotNull Player player) {
         UUID u = player.getUniqueId();
+        String usernameLast = player.getName() == null ? "" : player.getName();
         long now = System.currentTimeMillis();
-        return players.setSetupComplete(u, true, now).thenRun(() -> cache.invalidate(u));
+        return players.setSetupComplete(u, true, now)
+                .thenCompose(v -> cache.refresh(u, usernameLast))
+                .thenAccept(s -> {});
     }
 }

@@ -17,6 +17,8 @@ class MainConfigTest {
         assertFalse(cfg.economyEnabled());
         assertTrue(cfg.affectionEnabled());
         assertEquals(4.0, cfg.affectionMaxDistance(), 0.001);
+        assertEquals(0L, cfg.ringGrantCooldownMs());
+        assertEquals(20, cfg.ringPurchaseDiamonds());
     }
 
     @Test
@@ -28,6 +30,8 @@ class MainConfigTest {
         yaml.set("economy.engage-cost", 100.5);
         yaml.set("affection.enabled", false);
         yaml.set("affection.max-distance", 12.5);
+        yaml.set("cooldowns.ring-grant-ms", 12_000L);
+        yaml.set("ring.purchase-diamonds", 3);
         yaml.set("debug", true);
 
         MainConfig cfg = new MainConfig(yaml);
@@ -38,5 +42,7 @@ class MainConfigTest {
         assertFalse(cfg.affectionEnabled());
         assertEquals(12.5, cfg.affectionMaxDistance(), 0.001);
         assertTrue(cfg.debug());
+        assertEquals(12_000L, cfg.ringGrantCooldownMs());
+        assertEquals(3, cfg.ringPurchaseDiamonds());
     }
 }
