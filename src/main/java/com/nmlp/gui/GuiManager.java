@@ -74,6 +74,37 @@ public final class GuiManager {
         return true;
     }
 
+    public void clearGuiCooldown(@NotNull Player p) {
+        lastOpen.remove(p.getUniqueId());
+    }
+
+    public int hubSlot(@NotNull String key) {
+        return reload.gui().hubSlot(key);
+    }
+
+    /** Слот кнопки «В меню» для сундука с заданным числом рядов. */
+    public int menuBackSlot(int chestRows) {
+        return reload.gui().toHubSlot(chestRows);
+    }
+
+    public void runNext(@NotNull Runnable r) {
+        plugin.getServer().getScheduler().runTask(plugin, r);
+    }
+
+    public void openHub(@NotNull Player viewer) {
+        GuiConfig g = reload.gui();
+        Inventory inv = Bukkit.createInventory(null, g.rows("hub") * 9, MINI.deserialize(g.title("hub")));
+        sessions.open(viewer.getUniqueId(), GuiSessionRegistry.Kind.HUB);
+        fillFiller(inv, g);
+        inv.setItem(g.hubSlot("profile"), button(Material.BOOK, g.label("hub_profile"), g.label("hub_profile_hint")));
+        inv.setItem(g.hubSlot("family"), button(Material.CAKE, g.label("hub_family"), g.label("hub_family_hint")));
+        inv.setItem(g.hubSlot("tree"), button(Material.OAK_SAPLING, g.label("hub_tree"), g.label("hub_tree_hint")));
+        inv.setItem(g.hubSlot("history"), button(Material.PAPER, g.label("hub_history"), g.label("hub_history_hint")));
+        inv.setItem(g.hubSlot("settings"), button(Material.LIME_DYE, g.label("hub_settings"), g.label("hub_settings_hint")));
+        inv.setItem(g.hubSlot("close"), button(Material.BARRIER, g.label("hub_close"), g.label("hub_close_hint")));
+        viewer.openInventory(inv);
+    }
+
     public void openProfile(@NotNull Player viewer) {
         if (!tryCooldown(viewer)) {
             return;
@@ -89,6 +120,7 @@ public final class GuiManager {
             inv.setItem(15, headItem(snap.partnerUuid(), g.label("partner"), snap.partnerName() == null ? "?" : snap.partnerName()));
         }
         inv.setItem(31, button(Material.BOOK, g.label("history_title"), g.label("history_hint")));
+        placeBackToMenu(inv, g, rows);
         viewer.openInventory(inv);
     }
 
@@ -113,6 +145,7 @@ public final class GuiManager {
                 UUID other = link.fromUuid().equals(u) ? link.toUuid() : link.fromUuid();
                 inv.setItem(slot++, headItem(other, g.linkTypeLabel(link.linkType().name()), resolveName(other)));
             }
+            placeBackToMenu(inv, g, g.rows("family"));
             viewer.openInventory(inv);
         }));
     }
@@ -154,6 +187,7 @@ public final class GuiManager {
                         UUID partner = rel.playerLow().equals(u) ? rel.playerHigh() : rel.playerLow();
                         inv.setItem(22, headItem(partner, g.label("partner"), resolveName(partner)));
                     }
+                    placeBackToMenu(inv, g, g.rows("tree"));
                     viewer.openInventory(inv);
                 }));
     }
@@ -181,6 +215,7 @@ public final class GuiManager {
                 }
                 inv.setItem(slot++, paperRow(row, g));
             }
+            placeBackToMenu(inv, g, g.rows("history"));
             viewer.openInventory(inv);
         }));
     }
@@ -194,6 +229,7 @@ public final class GuiManager {
         sessions.open(viewer.getUniqueId(), GuiSessionRegistry.Kind.SETTINGS);
         fillFiller(inv, g);
         inv.setItem(13, settingsInfoItem(g));
+        placeBackToMenu(inv, g, g.rows("settings"));
         viewer.openInventory(inv);
     }
 
@@ -212,6 +248,11 @@ public final class GuiManager {
             p.setItemMeta(m);
         }
         return p;
+    }
+
+    private void placeBackToMenu(@NotNull Inventory inv, @NotNull GuiConfig g, int rows) {
+        int slot = g.toHubSlot(rows);
+        inv.setItem(slot, button(Material.ARROW, g.label("nav_back_to_menu"), g.label("nav_back_to_menu_hint")));
     }
 
     private void fillFiller(@NotNull Inventory inv, @NotNull GuiConfig g) {
@@ -262,7 +303,7 @@ public final class GuiManager {
         ItemMeta m = s.getItemMeta();
         if (m != null) {
             m.displayName(MINI.deserialize(title));
-            m.lore(List.of(MINI.deserialize("<dark_gray>" + hint)));
+            m.lore(List.of(MINI.deserialize(hint)));
             s.setItemMeta(m);
         }
         return s;

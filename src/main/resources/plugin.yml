@@ -75,3 +75,7 @@ commands:
     description: Администрирование NMLP.
     usage: /nmlp <reload|debug|give ring>
     permission: nmlp.reload
+  menu:
+    description: Главное меню отношений (профиль, семья, древо).
+    usage: /<command>
+    permission: nmlp.user

@@ -1,4 +1,15 @@
 # Заголовки GUI (MiniMessage) и подписи
+hub:
+  title: "<gradient:#54F46C:#03A469>Отношения</gradient> <gray>— меню</gray>"
+  rows: 4
+  slots:
+    profile: 11
+    family: 13
+    tree: 15
+    history: 21
+    settings: 23
+    close: 31
+
 profile:
   title: "<gradient:#6366f1:#8b5cf6>Профиль отношений</gradient>"
   rows: 4
@@ -24,21 +35,38 @@ filler:
   name: " "
 
 navigation:
+  # Слот «Назад в /menu»: ряд снизу (1 = нижний), колонка 0 = слева. Подгоняется под размер сундука.
+  back-row-from-bottom: 1
+  back-column: 0
   back-slot: 45
   next-slot: 53
   close-slot: 49
 
 labels:
-  you: "<green>Вы"
+  you: "<green>Ты"
   partner: "<light_purple>Партнёр"
   history_title: "<gray>История"
-  history_hint: "<dark_gray>Нажмите, чтобы открыть</dark_gray>"
-  tree_root: "<green>Вы"
+  history_hint: "<dark_gray>Нажми, чтобы открыть</dark_gray>"
+  tree_root: "<green>Ты"
   parent: "<gold>Родитель"
   child: "<yellow>Ребёнок"
   settings_gender: "<green>Пол"
   settings_gender_lore_1: "<gray>/gender male или /gender female</gray>"
   settings_gender_lore_2: "<dark_gray>Местоимения с полом автоматически</dark_gray>"
+  hub_profile: "<green>Профиль и статус</green>"
+  hub_profile_hint: "<dark_gray>Партнёр, ты, история</dark_gray><newline><gray>Команда: </gray><yellow>/partner</yellow>"
+  hub_family: "<aqua>Семья</aqua>"
+  hub_family_hint: "<dark_gray>Связи и родственники</dark_gray><newline><gray>Команда: </gray><yellow>/family</yellow>"
+  hub_tree: "<green>Родословная</green>"
+  hub_tree_hint: "<dark_gray>Древо отношений</dark_gray><newline><gray>Команда: </gray><yellow>/tree</yellow>"
+  hub_history: "<gold>История</gold>"
+  hub_history_hint: "<dark_gray>Прошлые отношения</dark_gray><newline><gray>Тот же экран из профиля (книга).</gray>"
+  hub_settings: "<yellow>Настройки</yellow>"
+  hub_settings_hint: "<dark_gray>Пол и мастер</dark_gray><newline><gray>Команды: </gray><yellow>/gender male</yellow> <gray>|</gray> <yellow>/gender female</yellow>"
+  hub_close: "<red>Закрыть</red>"
+  hub_close_hint: "<dark_gray>Снова открыть меню: </dark_gray><yellow>/menu</yellow>"
+  nav_back_to_menu: "<gray>◀ </gray><yellow>В меню</yellow>"
+  nav_back_to_menu_hint: "<dark_gray>Вернуться в главное меню</dark_gray><newline><gray>Команда: </gray><yellow>/menu</yellow>"
 
 link_type:
   PARENT: "<aqua>Родитель"

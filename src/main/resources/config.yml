@@ -1,6 +1,6 @@
 # Основной конфиг NMLP
 database:
-  file: "plugins/NMLP/data.db"
+  file: plugins/NMLP/data.db
   pool-size: 4
   max-lifetime-ms: 1800000
 
@@ -8,10 +8,9 @@ async:
   pool-threads: 4
 
 cooldowns:
+  ring-grant-ms: 0
   gui-open-ms: 500
   propose-ms: 30000
-  # Пауза между выдачами /engage ring одному игроку (0 = без ограничения)
-  ring-grant-ms: 0
 
 economy:
   enabled: false
@@ -20,11 +19,10 @@ economy:
   ring-cost: 0.0
 
 ring:
+  purchase-diamonds: 20
   material: CLOCK
   custom-model-data: 0
   proposal-radius: 5.0
-  # Сколько алмазов списывается с инвентаря при /engage ring (0 = бесплатно)
-  purchase-diamonds: 20
 
 effects:
   marriage:

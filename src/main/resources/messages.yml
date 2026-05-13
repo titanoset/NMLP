@@ -1,53 +1,74 @@
-# Сообщения MiniMessage. Плейсхолдеры: <actor>, <target>, <value>, <command> и т.д.
-prefix: "<gradient:#7c3aed:#a855f7>[NMLP]</gradient> <gray>»</gray> "
+# Сообщения MiniMessage. Плейсхолдеры: <actor>, <target>, <value>, <command>, <verb> и т.д.
+prefix: "<gradient:#54F46C:#03A469>[Отношения]</gradient> » "
+
+verbs:
+  propose:
+    male: "сделал"
+    female: "сделала"
+    unknown: "сделал"
+  hug:
+    male: "обнял"
+    female: "обняла"
+    unknown: "обнял"
+  kiss:
+    male: "поцеловал"
+    female: "поцеловала"
+    unknown: "поцеловал"
 
 # Иконки пола для PlaceholderAPI (%nmlp_gender%, %nmlp_gender_Ник%) — меняйте на свои символы/эмодзи
 icons:
   gender:
-    male: "♂"
-    female: "♀"
-    unknown: "○"
+    male: "&#6EF0FA♂"
+    female: "&#FA6E93♀"
+    unknown: "&#B0B0B0○"
 
 errors:
+  insufficient-funds: "<prefix><red>Недостаточно денег.</red>"
+  inventory-full: "<prefix><red>Инвентарь полон — освободи место.</red>"
+  ring-grant-cooldown: "<prefix><red>Слишком часто. Подожди <white><seconds></white> с.</red>"
+  insufficient-diamonds: "<prefix><red>Тебе нужно <white><amount></white> алмазов, чтобы получить кольцо.</red>"
   no-permission: "<prefix><red>Нет прав.</red>"
   player-only: "<prefix><red>Только для игроков.</red>"
   not-found: "<prefix><red>Игрок не найден.</red>"
-  cooldown: "<prefix><red>Подождите немного.</red>"
+  cooldown: "<prefix><red>Подожди немного.</red>"
   db-error: "<prefix><red>Ошибка базы данных.</red>"
-  already-married: "<prefix><red>Вы уже в браке.</red>"
+  already-married: "<prefix><red>Ты уже в браке.</red>"
   target-married: "<prefix><red>Этот игрок уже в браке.</red>"
-  not-engaged: "<prefix><red>Вы не помолвлены.</red>"
-  not-married: "<prefix><red>Вы не в браке.</red>"
+  not-engaged: "<prefix><red>У тебя нет помолвки.</red>"
+  not-married: "<prefix><red>Ты не в браке.</red>"
   must-engage-first: "<prefix><red>Сначала нужна помолвка.</red>"
   no-active-partner: "<prefix><red>Нет партнёра для этого действия.</red>"
   cannot-self: "<prefix><red>Нельзя выбрать себя.</red>"
-  invalid-gender: "<prefix><red>Укажите: male или female</red>"
-  proposal-pending: "<prefix><yellow>У вас уже есть активное предложение.</yellow>"
+  invalid-gender: "<prefix><red>Укажи: male или female</red>"
+  proposal-pending: "<prefix><yellow>У тебя уже есть активное предложение.</yellow>"
   no-pending: "<prefix><gray>Нет ожидающего предложения.</gray>"
-  ring-wrong-item: "<prefix><gray>Держите кольцо в основной руке.</gray>"
-  insufficient-funds: "<prefix><red>Недостаточно денег.</red>"
-  inventory-full: "<prefix><red>Инвентарь полон — освободите место.</red>"
-  ring-grant-cooldown: "<prefix><red>Слишком часто. Подождите <white><seconds></white> с.</red>"
-  insufficient-diamonds: "<prefix><red>Нужно <white><amount></white> алмазов что бы получить кольцо.</red>"
+  ring-wrong-item: "<prefix><gray>Держи кольцо в основной руке.</gray>"
 
 gender:
-  set: "<prefix><green>Пол: <white><value></white>. Местоимения выставлены автоматически.</green>"
-  current: "<prefix><gray>Пол: <white><value></white> — команды <white>/gender male</white> или <white>/gender female</white></gray>"
+  set: "<prefix><green>Пол: <white><value></white>."
+  current: "<prefix><gray>Твой пол: <white><value></white> — команды <white>/gender male</white> или <white>/gender female</white></gray>"
 
 wizard:
-  welcome: "<prefix><yellow>Добро пожаловать! Выберите пол: <click:run_command:'/gender male'><green>[мужской — он/его]</green></click> <click:run_command:'/gender female'><green>[женский — она/ее]</green></click></yellow>"
+  title_main: "<bold><gradient:#FFAA00:#FF5555>!</gradient></bold> <bold><yellow>ВЫБЕРИ ПОЛ</yellow></bold> <bold><gradient:#FF5555:#FFAA00>!</gradient></bold>"
+  title_sub: "<white>Нажми на зелёный или розовый текст в чате ниже</white>"
+  chat_spacer: " "
+  chat_head: "<gold>═══════</gold> <bold><yellow>NMLP</yellow></bold> <gold>═══════</gold>"
+  welcome: "<prefix><bold><yellow>Нажми кнопку:</yellow></bold><newline><click:run_command:'/gender male'><green><bold>  [ МУЖСКОЙ ]  </bold></green></click><newline><click:run_command:'/gender female'><light_purple><bold>  [ ЖЕНСКИЙ ]  </bold></light_purple></click>"
+  chat_hint: "<gray>Или напиши в чат: </gray><yellow>/gender male</yellow> <gray>или</gray> <yellow>/gender female</yellow>"
+  actionbar: "<bold><yellow>⚠ Выбери пол</yellow></bold> <gray>← см. чат и экран</gray>"
   done: "<prefix><green>Настройка профиля завершена.</green>"
 
 engage:
-  proposed: "<prefix><gold><actor> сделал(а) предложение <target>!</gold>"
-  received: "<prefix><gold><actor> хочет на вас жениться! Введите <green>/engage accept <actor></green> или проигнорируйте.</gold>"
+  proposed: "<prefix><gold><actor> <verb> предложение <target>!</gold>"
+  proposed_neutral: "<prefix><gold>К игроку <white><target></white> поступило предложение от <white><actor></white>!</gold>"
+  received: "<prefix><gold><actor> хочет пожениться с тобой! Введи <green>/engage accept <actor></green> или проигнорируй.</gold>"
   accepted: "<prefix><green>Помолвка принята!</green>"
-  notify-partner: "<prefix><green>Ваш партнёр принял помолвку.</green>"
-  ring-given: "<prefix><green>Вы получили помолвочное кольцо. ПКМ по игроку в основной руке — предложение.</green>"
+  notify-partner: "<prefix><green>Твой партнёр принял помолвку.</green>"
+  ring-given: "<prefix><green>Ты получил помолвочное кольцо. ПКМ по игроку в основной руке — предложение.</green>"
   usage: "<prefix><gray>Использование: <white>/engage accept <ник></white> или <white>/engage ring</white> (получить кольцо).</gray>"
 
 marry:
-  success: "<prefix><light_purple>Вы в браке!</light_purple>"
+  success: "<prefix><light_purple>Ты в браке!</light_purple>"
   broadcast: "<prefix><light_purple><a> и <b> поженились!</light_purple>"
 
 divorce:
@@ -59,6 +80,9 @@ partner:
 
 family:
   open: "<prefix><gray>Открываю меню семьи…</gray>"
+
+menu:
+  open: "<prefix><gray>Меню отношений.</gray>"
 
 adoption:
   usage: "<prefix><gray>Использование: <white>/adopt <ник></white></gray>"
@@ -92,35 +116,35 @@ placeholders:
 risk:
   disabled: "<prefix><gray>Риск-действия отключены.</gray>"
   unknown: "<prefix><red>Неизвестный ключ: <white><id></white></red>"
-  cooldown: "<prefix><red>Подождите перед повтором.</red>"
+  cooldown: "<prefix><red>Подожди перед повтором.</red>"
   use: "<prefix><green>Эффект применён (<white><id></white>).</green>"
   overuse: "<prefix><red>Слишком часто!</red>"
   lethal: "<prefix><dark_red>Организм не выдержал…</dark_red>"
   usage: "<prefix><gray>/risk</gray>"
   by_action:
     sex:
-      use: "<prefix><green>Вы провели близость с партнёром.</green>"
+      use: "<prefix><green>Ты провёл близость с партнёром.</green>"
       overuse: "<prefix><red>Слишком часто — организм не справляется.</red>"
       lethal: "<prefix><dark_red>Организм не выдержал перегрузки…</dark_red>"
     masturbate:
-      use: "<prefix><green>Вы удовлетворили себя.</green>"
+      use: "<prefix><green>Ты удовлетворил себя.</green>"
       overuse: "<prefix><red>Слишком часто — последствия неизбежны.</red>"
       lethal: "<prefix><dark_red>Организм не выдержал перегрузки…</dark_red>"
 
 affection:
   disabled: "<prefix><gray>Эмоции отключены.</gray>"
   cooldown: "<prefix><red>Слишком часто.</red>"
-  need-partner-or-name: "<prefix><gray>Партнёр не рядом — попробуйте <white><command> <ник></white>, если есть право «друг».</gray>"
+  need-partner-or-name: "<prefix><gray>Партнёр не рядом — попробуй <white><command> <ник></white>, если есть право «друг».</gray>"
   partner-offline: "<prefix><gray>Партнёр не в сети.</gray>"
-  partner-only: "<prefix><red>Это не ваш партнёр.</red>"
+  partner-only: "<prefix><red>Это не твой партнёр.</red>"
   cannot-self: "<prefix><red>Нельзя на себя.</red>"
   different-world: "<prefix><red>Только в одном мире.</red>"
   too-far: "<prefix><red>Слишком далеко.</red>"
   hug:
-    sender: "<prefix><green>Вы обняли <target>.</green>"
-    target: "<prefix><green><actor> обнял(а) вас.</green>"
-    nearby: "<prefix><gray><actor> обнял(а) <target>.</gray>"
+    sender: "<prefix><green>Ты обнял <target>.</green>"
+    target: "<prefix><green><actor> <verb> тебя.</green>"
+    nearby: "<prefix><gray><actor> <verb> <target>.</gray>"
   kiss:
-    sender: "<prefix><light_purple>Вы поцеловали <target>.</light_purple>"
-    target: "<prefix><light_purple><actor> поцеловал(а) вас.</light_purple>"
-    nearby: "<prefix><gray><actor> поцеловал(а) <target>.</gray>"
+    sender: "<prefix><light_purple>Ты поцеловал <target>.</light_purple>"
+    target: "<prefix><light_purple><actor> <verb> тебя.</light_purple>"
+    nearby: "<prefix><gray><actor> <verb> <target>.</gray>"

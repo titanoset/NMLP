@@ -2,6 +2,7 @@ package com.nmlp.command;
 
 import com.nmlp.config.MessageService;
 import com.nmlp.domain.GenderType;
+import com.nmlp.model.PlayerRow;
 import com.nmlp.service.GenderService;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 
 public final class GenderCommand implements CommandExecutor, TabCompleter {
 
@@ -34,7 +36,22 @@ public final class GenderCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args.length == 0) {
-            messages.send(p, "gender.current", "<gray>Gender</gray>", java.util.Map.of("value", "male|female"));
+            gender.playerRow(p.getUniqueId()).whenComplete((opt, ex) -> Bukkit.getScheduler().runTask(plugin, () -> {
+                if (!p.isOnline()) {
+                    return;
+                }
+                if (ex != null) {
+                    messages.send(p, "errors.db-error", "<red>DB</red>");
+                    return;
+                }
+                PlayerRow row = opt.orElse(null);
+                if (row == null || !row.setupWizardComplete()) {
+                    messages.showGenderWizardPrompt(p);
+                    return;
+                }
+                String value = row.genderCode() == null ? "—" : row.genderCode();
+                messages.send(p, "gender.current", "<gray>Gender</gray>", Map.of("value", value));
+            }));
             return true;
         }
         GenderType.fromInput(args[0]).ifPresentOrElse(

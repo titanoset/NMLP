@@ -49,11 +49,11 @@ public final class PlayerJoinListener implements Listener {
             PlayerRow row = opt.get();
             cache.refresh(u, name);
             if (!row.setupWizardComplete()) {
-                Bukkit.getScheduler().runTask(plugin, () -> {
+                Bukkit.getScheduler().runTaskLater(plugin, () -> {
                     if (player.isOnline()) {
-                        messages.send(player, "wizard.welcome", "<yellow>Welcome</yellow>");
+                        messages.showGenderWizardPrompt(player);
                     }
-                });
+                }, 35L);
             }
         });
     }

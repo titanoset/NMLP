@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 public final class GuiSessionRegistry {
 
     public enum Kind {
+        HUB,
         PROFILE,
         FAMILY,
         TREE,

@@ -1,5 +1,6 @@
 package com.nmlp.service;
 
+import com.nmlp.config.GenderVerbs;
 import com.nmlp.config.MainConfig;
 import com.nmlp.config.MessageService;
 import com.nmlp.config.ReloadManager;
@@ -9,6 +10,7 @@ import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -93,10 +95,13 @@ public final class AffectionService {
         cooldownUntil.put(cdKey, now + cfg.affectionCooldownMs());
         playParticles(actor, target, kind, cfg);
         String base = "affection." + kind.messageKey() + ".";
-        java.util.Map<String, String> map = java.util.Map.of(
-                "actor", actor.getName(),
-                "target", target.getName()
-        );
+        ProfileSnapshot actorSnap = cache.getCachedOrEmpty(actor.getUniqueId(), actor.getName());
+        String verbId = kind == AffectionKind.HUG ? "hug" : "kiss";
+        String verb = GenderVerbs.past(reload.messagesRaw(), verbId, actorSnap.genderCode());
+        Map<String, String> map = new HashMap<>();
+        map.put("actor", actor.getName());
+        map.put("target", target.getName());
+        map.put("verb", verb);
         messages.send(actor, base + "sender", "<green>Ok</green>", map);
         messages.send(target, base + "target", "<green>Ok</green>", map);
         broadcastNearby(actor, target, base + "nearby", map);

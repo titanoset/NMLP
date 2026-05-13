@@ -91,7 +91,9 @@ public final class NMLPPlugin extends JavaPlugin {
 
             registerCommands();
             getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, players, messages, profileCache), this);
-            getServer().getPluginManager().registerEvents(new RingInteractListener(this, reloadManager, documentItemService, relationshipService, messages), this);
+            getServer().getPluginManager().registerEvents(
+                    new RingInteractListener(this, reloadManager, documentItemService, relationshipService, messages, profileCache),
+                    this);
             getServer().getPluginManager().registerEvents(new GuiProtectListener(guiSessions, guiManager), this);
             getServer().getPluginManager().registerEvents(new RiskDeathListener(reloadManager, riskActionService), this);
 
@@ -154,6 +156,9 @@ public final class NMLPPlugin extends JavaPlugin {
         }
         if (getCommand("nmlp") != null) {
             getCommand("nmlp").setExecutor(new NmlpAdminCommand(this, reloadManager, messages, documentItemService));
+        }
+        if (getCommand("menu") != null) {
+            getCommand("menu").setExecutor(new MenuCommand(guiManager, messages));
         }
     }
 

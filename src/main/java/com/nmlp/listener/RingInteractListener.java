@@ -1,8 +1,11 @@
 package com.nmlp.listener;
 
+import com.nmlp.config.GenderVerbs;
 import com.nmlp.config.MessageService;
 import com.nmlp.config.ReloadManager;
 import com.nmlp.service.DocumentItemService;
+import com.nmlp.service.ProfileCache;
+import com.nmlp.service.ProfileSnapshot;
 import com.nmlp.service.RelationshipService;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -14,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -26,19 +30,22 @@ public final class RingInteractListener implements Listener {
     private final DocumentItemService items;
     private final RelationshipService relationships;
     private final MessageService messages;
+    private final ProfileCache profileCache;
 
     public RingInteractListener(
             @NotNull JavaPlugin plugin,
             @NotNull ReloadManager reload,
             @NotNull DocumentItemService items,
             @NotNull RelationshipService relationships,
-            @NotNull MessageService messages
+            @NotNull MessageService messages,
+            @NotNull ProfileCache profileCache
     ) {
         this.plugin = plugin;
         this.reload = reload;
         this.items = items;
         this.relationships = relationships;
         this.messages = messages;
+        this.profileCache = profileCache;
     }
 
     @EventHandler
@@ -70,10 +77,17 @@ public final class RingInteractListener implements Listener {
         }
         switch (res) {
             case OK -> {
-                messages.send(from, "engage.proposed", "<gold>Proposed</gold>", Map.of(
-                        "actor", from.getName(),
-                        "target", target.getName()
-                ));
+                ProfileSnapshot snap = profileCache.getCachedOrEmpty(from.getUniqueId(), from.getName());
+                String g = snap.genderCode();
+                Map<String, String> props = new HashMap<>();
+                props.put("actor", from.getName());
+                props.put("target", target.getName());
+                if (g != null && ("male".equalsIgnoreCase(g) || "female".equalsIgnoreCase(g))) {
+                    props.put("verb", GenderVerbs.past(reload.messagesRaw(), "propose", g));
+                    messages.send(from, "engage.proposed", "<gold>Proposed</gold>", props);
+                } else {
+                    messages.send(from, "engage.proposed_neutral", "<gold>Proposed</gold>", props);
+                }
                 messages.send(target, "engage.received", "<gold>Received</gold>", Map.of(
                         "actor", from.getName()
                 ));

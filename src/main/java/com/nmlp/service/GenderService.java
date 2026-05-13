@@ -8,6 +8,7 @@ import com.nmlp.repository.PlayerRepository;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
@@ -61,6 +62,10 @@ public final class GenderService {
             }
             return CompletableFuture.completedFuture(false);
         });
+    }
+
+    public @NotNull CompletableFuture<Optional<PlayerRow>> playerRow(@NotNull UUID uuid) {
+        return players.find(uuid);
     }
 
     public @NotNull CompletableFuture<Void> completeWizard(@NotNull Player player) {

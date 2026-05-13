@@ -31,7 +31,49 @@ public final class GuiProtectListener implements Listener {
         if (!sessions.isNmlp(p.getUniqueId())) {
             return;
         }
-        if (sessions.kindOrDefault(p.getUniqueId(), GuiSessionRegistry.Kind.PROFILE) == GuiSessionRegistry.Kind.PROFILE
+        GuiSessionRegistry.Kind kind = sessions.kindOrDefault(p.getUniqueId(), GuiSessionRegistry.Kind.PROFILE);
+        if (kind == GuiSessionRegistry.Kind.HUB) {
+            e.setCancelled(true);
+            int slot = e.getRawSlot();
+            if (slot == gui.hubSlot("close")) {
+                p.closeInventory();
+                return;
+            }
+            if (slot == gui.hubSlot("profile")) {
+                gui.clearGuiCooldown(p);
+                gui.runNext(() -> gui.openProfile(p));
+                return;
+            }
+            if (slot == gui.hubSlot("family")) {
+                gui.clearGuiCooldown(p);
+                gui.runNext(() -> gui.openFamily(p));
+                return;
+            }
+            if (slot == gui.hubSlot("tree")) {
+                gui.clearGuiCooldown(p);
+                gui.runNext(() -> gui.openTree(p));
+                return;
+            }
+            if (slot == gui.hubSlot("history")) {
+                gui.clearGuiCooldown(p);
+                gui.runNext(() -> gui.openHistory(p));
+                return;
+            }
+            if (slot == gui.hubSlot("settings")) {
+                gui.clearGuiCooldown(p);
+                gui.runNext(() -> gui.openSettings(p));
+                return;
+            }
+        } else {
+            int topSize = e.getView().getTopInventory().getSize();
+            if (e.getRawSlot() < topSize && e.getRawSlot() == gui.menuBackSlot(topSize / 9)) {
+                e.setCancelled(true);
+                gui.clearGuiCooldown(p);
+                gui.runNext(() -> gui.openHub(p));
+                return;
+            }
+        }
+        if (kind == GuiSessionRegistry.Kind.PROFILE
                 && e.getRawSlot() == 31) {
             e.setCancelled(true);
             gui.openHistory(p);
